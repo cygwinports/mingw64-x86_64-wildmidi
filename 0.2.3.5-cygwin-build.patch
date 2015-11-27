@@ -1,0 +1,24 @@
+--- origsrc/wildmidi-0.2.3.5/configure.ac	2011-11-30 12:39:33.000000000 -0600
++++ src/wildmidi-0.2.3.5/configure.ac	2015-11-23 22:58:35.917178300 -0600
+@@ -75,21 +75,6 @@ case "$host_os" in
+ 		mingw=yes
+ 		CFLAGS="$CFLAGS -I\$(top_srcdir)/include/win32"
+ 		LDFLAGS="$LDFLAGS -luser32 -lgdi32 -lwinmm"
+-		if test "x$host" != "x$build"; then
+-			case "$build_os" in
+-				cygwin*)
+-					CFLAGS="$CFLAGS -mno-cygwin -mconsole"
+-					LDFLAGS="$LDFLAGS -L/usr/lib/w32api $LDFLAGS"
+-					CPPFLAGS="$CPPFLAGS $CFLAGS"
+-					;;
+-				*)
+-					CC="$host_cpu-$host_os-gcc"
+-					AS="$CC"
+-					AR="$host_cpu-$host_os-ar"
+-					RANLIB="$host_cpu-$host_os-ranlib"
+-					;;
+-			esac
+-		fi
+ 		endian="little"
+ 		;;
+ 	cygwin*)
