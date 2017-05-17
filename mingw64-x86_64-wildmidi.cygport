@@ -1,8 +1,8 @@
 CROSS_HOST="x86_64-w64-mingw32"
-inherit cross
+inherit cross cmake
 
 NAME="mingw64-x86_64-wildmidi"
-VERSION=0.2.3.5
+VERSION=0.3.12
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="MIDI to WAV library for Win64 toolchain"
@@ -15,14 +15,19 @@ multithreading and multiprocessing of midi files, allowing for the mixing of
 multiple midi file at any one time if someone had a desire to do so. This
 library is what turns the midi files into audio data using the gus pat
 sets."
-HOMEPAGE="http://wildmidi.sourceforge.net/"
-SRC_URI="mirror://sourceforge/wildmidi/wildmidi-${VERSION}.tar.gz"
-SRC_DIR="wildmidi-${VERSION}"
-PATCH_URI="
-	0.2.3.5-cygwin-build.patch
-	0.2.3.5-win64.patch
-	0.2.3.5-parallel-make.patch
+HOMEPAGE="https://www.mindwerks.net/projects/wildmidi/"
+SRC_URI="https://github.com/Mindwerks/wildmidi/archive/wildmidi-${VERSION}/wildmidi-wildmidi-${VERSION}.tar.gz"
+SRC_DIR="wildmidi-wildmidi-${VERSION}"
+PATCH_URI="0.3.12-mingw-build.patch"
+
+CYGCMAKE_ARGS="
+	-DWANT_PLAYER=OFF
+	-DCMAKE_SHARED_LIBRARY_NAME_WITH_VERSION=ON
 "
 
-CYGCONF_ARGS="--disable-werror"
-MAKEOPTS+=" bin_PROGRAMS= man1_MANS= man3_MANS= man5_MANS= "
+src_install() {
+	cd ${B}
+	cyginstall
+
+	find ${D}${CROSS_DATADIR}/man/ -delete
+}
