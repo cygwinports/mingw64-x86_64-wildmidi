@@ -2,7 +2,7 @@ CROSS_HOST="x86_64-w64-mingw32"
 inherit cross cmake
 
 NAME="mingw64-x86_64-wildmidi"
-VERSION=0.3.12
+VERSION=0.4.1
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="MIDI to WAV library for Win64 toolchain"
@@ -18,11 +18,9 @@ sets."
 HOMEPAGE="https://www.mindwerks.net/projects/wildmidi/"
 SRC_URI="https://github.com/Mindwerks/wildmidi/archive/wildmidi-${VERSION}/wildmidi-wildmidi-${VERSION}.tar.gz"
 SRC_DIR="wildmidi-wildmidi-${VERSION}"
-PATCH_URI="0.3.12-mingw-build.patch"
 
 CYGCMAKE_ARGS="
 	-DWANT_PLAYER=OFF
-	-DCMAKE_SHARED_LIBRARY_NAME_WITH_VERSION=ON
 "
 
 src_install() {
